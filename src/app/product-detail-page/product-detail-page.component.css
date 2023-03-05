@@ -1,0 +1,19 @@
+#selected-product-card {
+    width: 13cm;
+    height: 9cm;
+    background-color: rgb(101, 101, 101);
+    border: 2mm solid rgba(0, 0, 0, 1);
+    border-radius: 4mm;
+    margin: 8mm 0 0 7mm;
+    box-shadow: 0 0 6mm 6mm rgb(40, 80, 40);
+    float: left;
+}
+
+ul {
+    display: inline-block;
+    margin: 8mm 0 0 5mm;
+}
+
+li {
+    margin: 2mm 0 2mm 0;
+}

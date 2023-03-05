@@ -1,0 +1,53 @@
+<div *ngFor="let _prdct_ of _products_$">
+    <div *ngIf="_prdct_.id === id_of_selected_products">
+        <mat-card id="selected-product-card">
+            <mat-card-header>
+                <mat-card-title-group>
+                    <mat-card-title *ngIf="edited_product_card_name; else DefaultPrdctCardName">
+                        <span>{{edited_product_card_name}}</span>
+                    </mat-card-title>
+                    <ng-template #DefaultPrdctCardName>
+                        <mat-card-title>
+                            <span>{{_prdct_.name}}</span>
+                        </mat-card-title>
+                    </ng-template>
+                    <mat-card-subtitle *ngIf="edited_product_card_price; else DefaultPrdctCardPrice">
+                        <span>{{edited_product_card_price | currency}}</span>
+                    </mat-card-subtitle>
+                    <ng-template #DefaultPrdctCardPrice>
+                        <mat-card-subtitle>
+                            <span>{{_prdct_.price | currency}}</span>
+                        </mat-card-subtitle>
+                    </ng-template>
+                    <img mat-card-xl-image [src]="(_prdct_['image'])">
+                </mat-card-title-group>
+            </mat-card-header>
+            <mat-card-content *ngIf="edited_product_card_description; else DefaultPrdctCardDescription">
+                <span>{{edited_product_card_description}}</span>
+            </mat-card-content>
+            <ng-template #DefaultPrdctCardDescription>
+                <mat-card-content>
+                    <span>{{_prdct_.description}}</span>
+                </mat-card-content>
+            </ng-template>
+        </mat-card>
+    </div>
+</div>
+
+<ul>
+    <li>
+        <button mat-raised-button color="accent" class="editBttn" (click)="openDialog_EditPrdctCardName()">
+            <span>edit product card "NAME"</span>
+        </button>
+    </li>
+    <li>
+        <button mat-raised-button color="accent" class="editBttn" (click)="openDialog_EditPrdctCardPrice()">
+            <span>edit product card "PRICE"</span>
+        </button>
+    </li>
+    <li>
+        <button mat-raised-button color="accent" class="editBttn" (click)="openDialog_EditPrdctCardDesc()">
+            <span>edit product card "DESCRIPTION"</span>
+        </button>
+    </li>
+</ul>

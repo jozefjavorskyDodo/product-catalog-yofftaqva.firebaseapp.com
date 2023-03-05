@@ -1,0 +1,176 @@
+<div id="categories-container">
+    <mat-selection-list [multiple]="false">
+        <mat-list-option selected (click)="category_select_box_1st_option()">
+            <span>All Products</span>
+        </mat-list-option>
+        <mat-list-option (click)="category_select_box_2nd_option()">
+            <span>&nbsp;&nbsp;&nbsp;Category 1</span>
+        </mat-list-option>
+        <mat-list-option (click)="category_select_box_3rd_option()">
+            <span>&nbsp;&nbsp;&nbsp;Category 2</span>
+        </mat-list-option>
+        <mat-list-option (click)="category_select_box_4th_option()">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Category 2.1</span>
+        </mat-list-option>
+        <mat-list-option (click)="category_select_box_5th_option()">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Category 2.2</span>
+        </mat-list-option>
+        <mat-list-option (click)="category_select_box_6th_option()">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Category 2.2.1</span>
+        </mat-list-option>
+        <mat-list-option (click)="category_select_box_7th_option()">
+            <span>&nbsp;&nbsp;&nbsp;Category 3</span>
+        </mat-list-option>
+        <mat-list-option (click)="category_select_box_8th_option()">
+            <span>&nbsp;&nbsp;&nbsp;Category 4</span>
+        </mat-list-option>
+    </mat-selection-list>
+</div>
+
+<div id="products-pseudo-header">
+    <button mat-stroked-button color="accent" class="sortBttn" onclick="javascript:
+        'use strict';
+        try {
+            let node_products = [...document.querySelectorAll('.productContainer')];
+            if (node_products.length >= 2) {
+                var from_sorted_by_name = [];
+                var to_sorted_by_name = [...document.querySelectorAll('.productContainer')];
+                node_products.forEach((_prdct_) => {
+                    from_sorted_by_name.push(
+                        String(_prdct_.childNodes[0].childNodes[0].childNodes[0].innerText) +
+                        '~~~' +
+                        String(_prdct_.childNodes[0].childNodes[0].getAttribute('href')) +
+                        '~~~' +
+                        String(_prdct_.childNodes[1].childNodes[0].getAttribute('src')) +
+                        '~~~' +
+                        String(_prdct_.childNodes[5].childNodes[0].innerText.split('$')[1].split('.')[0])
+                    );
+                });
+                from_sorted_by_name.sort();
+                for (let yndex_iterator = 0; yndex_iterator <= from_sorted_by_name.length - 1; yndex_iterator++) {
+                    to_sorted_by_name[yndex_iterator].childNodes[0].childNodes[0].setAttribute('href', from_sorted_by_name[yndex_iterator].split('~~~')[1]);
+                    to_sorted_by_name[yndex_iterator].childNodes[0].childNodes[0].childNodes[0].innerText = from_sorted_by_name[yndex_iterator].split('~~~')[0];
+                    to_sorted_by_name[yndex_iterator].childNodes[1].childNodes[0].setAttribute('src', from_sorted_by_name[yndex_iterator].split('~~~')[2]);
+                    to_sorted_by_name[yndex_iterator].childNodes[5].childNodes[0].innerText = '$' + from_sorted_by_name[yndex_iterator].split('~~~')[3] + '.00';
+                };
+            };
+        } catch (err) {
+            if (err) {
+                console.clear();
+                console.log(err);
+            };
+        };
+    ">
+        <span>sort by name</span>
+    </button>
+    <button mat-stroked-button color="accent" class="sortBttn" onclick="javascript:
+        'use strict';
+        let _node_prdcts_ = [...document.querySelectorAll('.productContainer')];
+        if (_node_prdcts_.length >= 2) {
+            let _keys_arr_ = [];
+            let _vals_arr_ = [];
+            let _obj_of_objs_of_merged_keys_vals_arrs_ = {};
+            var _sorted_prdcs_by_price_ = [];
+            var _KeysPoppedOff_ButValuesRemain_ = [];
+            var _prdcts_arr_ = [...document.querySelectorAll('.productContainer')];
+            var _prdcts_entries_ = [...document.querySelectorAll('.productContainer')];
+            for (let _yndx_ = 0; _yndx_ <= _prdcts_arr_.length - 1; _yndx_++) {
+                _keys_arr_.push(
+                    String(_prdcts_arr_[_yndx_].childNodes[0].childNodes[0].getAttribute('href')) +
+                    '~~~' +
+                    String(_prdcts_arr_[_yndx_].childNodes[0].childNodes[0].childNodes[0].innerText) +
+                    '~~~' +
+                    String(_prdcts_arr_[_yndx_].childNodes[1].childNodes[0].getAttribute('src')) +
+                    '~~~' +
+                    String(_prdcts_arr_[_yndx_].childNodes[5].childNodes[0].innerText.split('$')[1].split('.')[0])
+                );
+            };
+            for (let _i_ = 0; _i_ <= _prdcts_arr_.length - 1; _i_++) {
+                _vals_arr_.push(
+                    Number(String(_prdcts_arr_[_i_].childNodes[5].childNodes[0].innerText.split('$')[1].split('.')[0]))
+                );
+            };
+            _keys_arr_.forEach((k, v) => _obj_of_objs_of_merged_keys_vals_arrs_[k] = _vals_arr_[v]);
+            _sorted_prdcs_by_price_ = Object.entries(_obj_of_objs_of_merged_keys_vals_arrs_).sort(([ ,p], [ ,n]) => (p - n));
+            for (let _subitem_ in _sorted_prdcs_by_price_) {
+                _KeysPoppedOff_ButValuesRemain_.push(
+                    String(_sorted_prdcs_by_price_[_subitem_][0])
+                );
+            };
+            for (let _y_x_ = 0; _y_x_ <= _prdcts_entries_.length - 1; _y_x_++) {
+                _prdcts_entries_[_y_x_].childNodes[0].childNodes[0].setAttribute('href', _KeysPoppedOff_ButValuesRemain_[_y_x_].split('~~~')[0]);
+                _prdcts_entries_[_y_x_].childNodes[0].childNodes[0].childNodes[0].innerText = _KeysPoppedOff_ButValuesRemain_[_y_x_].split('~~~')[1];
+                _prdcts_entries_[_y_x_].childNodes[1].childNodes[0].setAttribute('src', _KeysPoppedOff_ButValuesRemain_[_y_x_].split('~~~')[2]);
+                _prdcts_entries_[_y_x_].childNodes[5].childNodes[0].innerText = '$' + _KeysPoppedOff_ButValuesRemain_[_y_x_].split('~~~')[3] + '.00';
+            };
+        };
+        try {
+        } catch (err) {
+            if (err) {
+                console.clear();
+                console.log(err);
+            };
+        };
+    ">
+        <span>sort by price</span>
+    </button>
+</div>
+
+<br>
+
+<div id="products-view-state">
+    <mat-grid-list cols="2" rowHeight="3:2">
+        <div *ngFor="let prdct of products$">
+            <div *ngIf="(selected_category$ | async) === (prdct['categoryId'])">
+                <mat-grid-tile>
+                    <div class="productContainer">
+                        <p class="BlockLevelElement_lineOfProductContainer">
+                            <a [href]="'product/'+(prdct.id)" target="_blank">
+                                <button mat-raised-button color="accent">{{prdct.name}}</button>
+                            </a>
+                        </p>
+                        <p class="BlockLevelElement_lineOfProductContainer">
+                            <img [src]="(prdct['image'])" class="productImg">
+                            <button mat-mini-fab color="warn" class="removalBttn" onclick="javascript:'use strict';
+                                try {this.parentElement.parentElement.remove();}
+                                catch (err) {if (err) {console.clear();console.log(err);};};">
+                                <span>X</span>
+                            </button>
+                        </p>
+                        <br>
+                        <br>
+                        <br>
+                        <p class="BlockLevelElement_lineOfProductContainer">
+                            <span class="productPrice">{{prdct.price | currency}}</span>
+                        </p>
+                    </div>
+                </mat-grid-tile>
+            </div>
+            <div *ngIf="(selected_category$ | async) === ('products-of-all-ids-altogether')">
+                <mat-grid-tile>
+                    <div class="productContainer">
+                        <p class="BlockLevelElement_lineOfProductContainer">
+                            <a [href]="'product/'+(prdct.id)" target="_blank">
+                                <button mat-raised-button color="accent">{{prdct.name}}</button>
+                            </a>
+                        </p>
+                        <p class="BlockLevelElement_lineOfProductContainer">
+                            <img [src]="(prdct['image'])" class="productImg">
+                            <button mat-mini-fab color="warn" class="removalBttn" onclick="javascript:'use strict';
+                                try {this.parentElement.parentElement.remove();}
+                                catch (err) {if (err) {console.clear();console.log(err);};};">
+                                <span>X</span>
+                            </button>
+                        </p>
+                        <br>
+                        <br>
+                        <br>
+                        <p class="BlockLevelElement_lineOfProductContainer">
+                            <span class="productPrice">{{prdct.price | currency}}</span>
+                        </p>
+                    </div>
+                </mat-grid-tile>
+            </div>
+        </div>
+    </mat-grid-list>
+</div>

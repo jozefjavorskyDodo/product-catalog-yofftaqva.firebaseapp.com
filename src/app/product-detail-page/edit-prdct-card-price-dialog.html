@@ -1,0 +1,17 @@
+<div mat-dialog-content>
+    <mat-form-field appearance="fill">
+        <mat-label>
+            <span>edited_product_card_price</span>
+        </mat-label>
+        <input matInput [(ngModel)]="data.edited_product_card_price">
+    </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">
+        <span>No Thanks</span>
+    </button>
+    <button mat-button [mat-dialog-close]="data.edited_product_card_price" cdkFocusInitial>
+        <span>Ok</span>
+    </button>
+</div>
